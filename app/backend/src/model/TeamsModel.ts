@@ -12,9 +12,9 @@ export default class TeamsModel implements ITeamsModel {
     ));
   }
 
-  async findById(id: ITeams['id']): Promise<ITeamsResponse | null>{
+  async findById(id: ITeams['id']): Promise<ITeamsResponse | null> {
     const team = await this.model.findByPk(id);
-    if(!team) return null;
-    return team
+    if (!team) return null;
+    return team;
   }
 }
