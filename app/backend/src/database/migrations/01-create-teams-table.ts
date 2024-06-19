@@ -1,5 +1,5 @@
 import { DataTypes, Model, QueryInterface } from 'sequelize';
-import { ITeams } from '../../Interfaces/ITeams';
+import { ITeams } from '../../Interfaces/Teams/ITeams';
 
 export default {
     async up(queryInterface: QueryInterface) {
@@ -12,7 +12,8 @@ export default {
       },
       teamName: {
           type: DataTypes.STRING,
-          allowNull: false
+          allowNull: false,
+          field: 'team_name',
       },
       })
     },
