@@ -1,11 +1,11 @@
-import SequelizeTeams from '../../database/models/SequelizeTeams'
-import { app } from "../../app";
+import SequelizeTeams from '../database/models/SequelizeTeams'
+import { app } from "../app";
 import * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 import { Response } from 'superagent';
-import { AllTeams, teamById } from '../mocks/teams.mock';
+import { AllTeams, teamById } from './mocks/teams.mock';
 
 chai.use(chaiHttp);
 

@@ -12,4 +12,6 @@ router.post(
   (req: Request, res: Response) => usersController.Login(req, res),
 );
 
+router.get('/:role', (req: Request, res: Response) => usersController.Login(req, res));
+
 export default router;

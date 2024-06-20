@@ -15,6 +15,17 @@ class Validation {
     }
     next();
   }
+
+  static validateUser(req: Request, res: Response, next: NextFunction): Response | void {
+    const user = req.body;
+    const requiredKeys = ['email', 'password', 'name'];
+    const notFoundKey = requiredKeys.find((key) => !(key in user));
+    if (notFoundKey) {
+      return res.status(400).json({ message: `${notFoundKey} is required` });
+    }
+
+    next();
+  }
 }
 
 export default Validation;
