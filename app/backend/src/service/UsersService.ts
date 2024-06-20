@@ -24,4 +24,12 @@ export default class UsersService {
     }
     return { status: 'UNAUTHORIZED', data: { message: 'Invalid email or password' } };
   }
+
+  public async getRole(email: IUser['email']): Promise<ServiceResponse<ServiceMessage | IToken>> {
+    const user = await this.userModel.findByEmail(email);
+    if (!user) {
+      return { status: 'UNAUTHORIZED', data: { message: 'Token must be a valid token' } };
+    }
+    return { status: 'SUCCESSFUL', data: { role: user.role } };
+  }
 }
