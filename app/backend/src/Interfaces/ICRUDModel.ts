@@ -19,4 +19,5 @@ export interface ICRUDModelReaderMatches<T> {
     homeTeamGoals: number;
     awayTeamGoals: number;
   }): Promise<T>;
+
 }

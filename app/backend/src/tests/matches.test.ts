@@ -6,6 +6,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import { Response } from 'superagent';
 import { matches, newMatch } from './mocks/matches.mock';
+import JWT from '../utils/JWT';
 
 chai.use(chaiHttp);
 
@@ -25,14 +26,17 @@ describe('Matches router test', () => {
 
   it('Create new match with success', async function() {
     sinon.stub(SequelizeMatches, 'create').resolves(newMatch as any);
-    const { status, body } = await chai.request(app).post('/matches').send({
+    const token = JWT.sign({ email: 'admin@admin.com' });
+
+    const { status, body } = await chai.request(app).post('/matches').set('Authorization', `Bearer ${token}`)
+    .send({
       "homeTeamId": 16,
       "awayTeamId": 8,
       "homeTeamGoals": 2,
       "awayTeamGoals": 2
     });
 
-    expect(status).to.equal(200);
+    expect(status).to.equal(201);
     expect(body).to.deep.equal(newMatch) 
   });
   afterEach(sinon.restore);
