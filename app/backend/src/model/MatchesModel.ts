@@ -2,6 +2,7 @@ import SequelizeTeams from '../database/models/SequelizeTeams';
 import SequelizeMatches from '../database/models/SequelizeMatches';
 import { IMatches } from '../Interfaces/Matches/IMatches';
 import { IMatchesModel } from '../Interfaces/Matches/IMatchesModel';
+import { ScoreParams } from '../Interfaces/Matches/scoreParams';
 
 export default class MatchesModel implements IMatchesModel {
   private model = SequelizeMatches;
@@ -33,6 +34,17 @@ export default class MatchesModel implements IMatchesModel {
       dbdata.inProgress = false;
       await dbdata.save();
       return dbdata;
+    }
+    return null;
+  }
+
+  async findScores({ id, homeTeamGoals, awayTeamGoals }: ScoreParams): Promise<IMatches | null> {
+    const dbData = await this.model.findOne({ where: { id } });
+    if (dbData) {
+      dbData.homeTeamGoals = homeTeamGoals;
+      dbData.awayTeamGoals = awayTeamGoals;
+      await dbData.save();
+      return dbData;
     }
     return null;
   }
