@@ -25,4 +25,10 @@ export default class MatchesController {
     const serviceResponse = await this.matchesService.findMatchesByStatus(inProgressParam);
     return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
+
+  public async patchMatches(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const serviceResponse = await this.matchesService.patchMatch(Number(id));
+    return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+  }
 }

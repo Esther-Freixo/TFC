@@ -26,4 +26,14 @@ export default class MatchesModel implements IMatchesModel {
     });
     return dbData;
   }
+
+  async findMatch(id: number): Promise<IMatches | null> {
+    const dbdata = await this.model.findOne({ where: { id } });
+    if (dbdata) {
+      dbdata.inProgress = false;
+      await dbdata.save();
+      return dbdata;
+    }
+    return null;
+  }
 }
