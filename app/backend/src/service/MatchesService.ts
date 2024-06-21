@@ -2,7 +2,7 @@ import MatchesModel from '../model/MatchesModel';
 import { IMatches } from '../Interfaces/Matches/IMatches';
 import { ServiceMessage, ServiceResponse } from '../Interfaces/ServiceRespose';
 import { IMatchesModel } from '../Interfaces/Matches/IMatchesModel';
-import { ScoreParams } from '../Interfaces/Matches/scoreParams';
+import { ScoreParams, NewMatchParams } from '../Interfaces/Matches/scoreParams';
 
 export default class MatchesService {
   constructor(
@@ -28,5 +28,16 @@ export default class MatchesService {
   Promise<ServiceResponse<ServiceMessage | null>> {
     await this.matchesModel.findScores({ id, homeTeamGoals, awayTeamGoals });
     return { status: 'SUCCESSFUL', data: { message: 'Score updated' } };
+  }
+
+  public async createMatchService({ homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals }:
+  NewMatchParams): Promise<ServiceResponse<IMatches>> {
+    const newMatch = await this.matchesModel.createMatchDB({
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+    });
+    return { status: 'CREATED', data: newMatch };
   }
 }

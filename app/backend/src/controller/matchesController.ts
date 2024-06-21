@@ -42,4 +42,24 @@ export default class MatchesController {
       .changeMatchScore({ id: matchId, homeTeamGoals: homeGoals, awayTeamGoals: awayGoals });
     return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
   }
+
+  public async createMatch(req: Request, res: Response): Promise<Response> {
+    const { homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals } = req.body;
+    const homeId = Number(homeTeamId);
+    const awayId = Number(awayTeamId);
+    const homeGoals = Number(homeTeamGoals);
+    const awayGoals = Number(awayTeamGoals);
+
+    const serviceResponse = await this.matchesService
+      .createMatchService({
+        homeTeamId: homeId,
+        awayTeamId: awayId,
+        homeTeamGoals: homeGoals,
+        awayTeamGoals: awayGoals,
+      });
+    return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+  }
 }
