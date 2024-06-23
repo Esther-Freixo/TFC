@@ -20,4 +20,6 @@ export interface ICRUDModelReaderMatches<T> {
     awayTeamGoals: number;
   }): Promise<T>;
 
+  findEndedMatches(teamId:number): Promise<T[]>,
+
 }

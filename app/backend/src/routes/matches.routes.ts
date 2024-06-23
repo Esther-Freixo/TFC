@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import MatchesController from '../controller/matchesController';
+import MatchesController from '../controller/MatchesController';
 import Validation from '../middlewares/validations';
 
 const matchesController = new MatchesController();

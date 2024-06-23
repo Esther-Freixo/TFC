@@ -56,4 +56,10 @@ export default class MatchesModel implements IMatchesModel {
       homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals, inProgress });
     return newMatch;
   }
+
+  async findEndedMatches(teamId:number): Promise<IMatches[]> {
+    const dbData = await this.model.findAll({
+      where: { homeTeamId: teamId, inProgress: false } });
+    return dbData;
+  }
 }
